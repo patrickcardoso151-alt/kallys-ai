@@ -38,7 +38,11 @@ LLM API
 ↓  
 Visualization and Analysis
 
+This project was developed entirely in a mobile environment, utilizing code editing tools directly on a smartphone. Choosing this workflow reflects my technical adaptability and problem-solving skills across different platforms, ensuring the delivery of a fully functional and responsive application without the need for a traditional desktop setup.
+
+
 ## Author
 
 Patrick Cardoso  
-Independent Developer
+IT Professional | Independent Developer
+​I am an Information Technology professional, recently graduated, with a focus on web development and systems analysis. This project is a practical application of the concepts I mastered during my training, demonstrating my ability to build complex, responsive, and functional tools even in a 100% mobile environment. I am currently seeking new opportunities to apply my technical resilience and IT expertise in professional challenges.
