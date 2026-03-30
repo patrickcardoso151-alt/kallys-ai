@@ -43,7 +43,17 @@ This project was developed entirely in a mobile environment, utilizing code edit
 
 ## Author
 
-Patrick Cardoso  
-IT Professional | Independent Developer
+Contact and Opportunities
 
-​I am an Information Technology professional, recently graduated, with a focus on web development and systems analysis. This project is a practical application of the concepts I mastered during my training, demonstrating my ability to build complex, responsive, and functional tools even in a 100% mobile environment. I am currently seeking new opportunities to apply my technical resilience and IT expertise in professional challenges.
+If you are a recruiter or developer interested in discussing this project, partnerships, or professional opportunities, please feel free to reach out:
+
+* **Email:** patrickcardoso151@gmail.com
+* **GitHub:** [@patrickcardoso151-alt](https://github.com/patrickcardoso151-alt)
+
+---
+
+### About the Author
+
+**Patrick Cardoso, IT Professional | Independent Developer**
+
+I am an Information Technology professional, recently graduated, with a focus on web development and systems analysis. This project is a practical application of the concepts I mastered during my training, demonstrating my ability to build complex, responsive, and functional tools, even in a 100% mobile environment. Currently, I am seeking new opportunities to apply my technical resilience and IT expertise to professional challenges.
