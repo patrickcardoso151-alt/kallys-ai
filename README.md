@@ -24,7 +24,7 @@ KALLYS AI combines a conversational interface with operational dashboards, memor
 - JavaScript
 - Chart.js
 - Tesseract.js
-- LLM API integration
+- LLM Orchestration: Groq API (Llama 3      models) for ultra-low latency
 
 ## Architecture
 
