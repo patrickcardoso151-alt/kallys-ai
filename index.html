@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KALLYS AI - V9.0.0 DATA VISION</title>
+    <title>KALLYS AI - V9.1.5 STEALTH UI</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -22,9 +22,18 @@
         }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg-color); color: var(--text-main); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; transition: 0.3s; }
         
+        /* HEADER OTIMIZADO */
         .app-header { padding: 10px; background: var(--card-bg); border-bottom: 2px solid var(--accent-color); display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--accent-color); object-fit: cover; filter: drop-shadow(0 0 8px var(--accent-color)); }
         
+        /* AJUSTE DE ESPAÇO PARA 3 SELETORES */
+        .header-selectors { position: absolute; top: 8px; left: 10px; display: flex; flex-direction: column; gap: 3px; width: 110px; }
+        .header-selectors select { 
+            width: 100%; background: rgba(0,0,0,0.4); color: var(--accent-color); 
+            border: 1px solid var(--border-color); padding: 2px 4px; border-radius: 4px; 
+            font-size: 8.5px; outline: none; appearance: none; cursor: pointer;
+        }
+
         .led-panel { display: flex; gap: 8px; margin-top: 4px; }
         .led { width: 7px; height: 7px; border-radius: 50%; background: #222; transition: 0.2s; border: 1px solid rgba(255,255,255,0.05); }
         .led-active { background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); }
@@ -65,7 +74,6 @@
         .btn-mute.active { background: var(--danger-red); border-color: var(--danger-red); }
         .btn-send { background: var(--accent-color); width: 42px; height: 42px; border-radius: 6px; border: none; color: white; cursor: pointer; font-size: 18px; font-weight: bold; }
 
-        select { width: 100%; background: var(--bg-color); color: var(--accent-color); border: 1px solid var(--border-color); padding: 6px; border-radius: 4px; font-size: 11px; margin-bottom: 8px; outline: none; }
         .memoria-bar { width: 100%; height: 2px; background: #1a1a1a; margin-bottom: 6px; border-radius: 1px; overflow: hidden; }
         #status-bar { height: 100%; width: 0%; background: var(--accent-color); transition: 0.4s; }
         
@@ -81,13 +89,38 @@
 <body>
 
     <div class="app-header">
+        <div class="header-selectors">
+            <select id="select-missao" onchange="atualizarMissao()">
+                <option value="padrao">📌 Missão: Padrão</option>
+                <option value="estrategia">🧠 Missão: Estratégia</option>
+                <option value="comunicacao">🗣️ Missão: Escrita</option>
+                <option value="criativo">🎨 Missão: Criativo</option>
+                <option value="aprender">🎓 Missão: Didática</option>
+                <option value="programar">💻 Missão: Software</option>
+                <option value="investigar">🕵️ Missão: Forense</option>
+                <option value="motivacional">🔥 Missão: Moral</option>
+                <option value="gamer">🎮 Missão: Gamer</option>
+            </select>
+            <select id="select-humor" onchange="atualizarHumor()">
+                <option value="amigavel">😊 Humor: Amigável</option>
+                <option value="deboxada">😏 Humor: Debochado</option>
+                <option value="seria">😐 Humor: Sério</option>
+                <option value="simpatica">✨ Humor: Simpático</option>
+            </select>
+            <select id="select-idioma" onchange="atualizarIdioma()">
+                <option value="pt-br">🇧🇷 Idioma: PT-BR</option>
+                <option value="en">🇺🇸 Idioma: EN-US</option>
+                <option value="es">🇪🇸 Idioma: ES-ES</option>
+            </select>
+        </div>
+
         <img src="Logo.png" alt="KALLYS" class="logo-img">
         <div class="led-panel">
             <div id="led-cpu" class="led" title="Neural Core"></div>
             <div id="led-mem" class="led" title="LTM Sync"></div>
             <div id="led-file" class="led" title="Sensory Input"></div>
         </div>
-        <div class="app-title">DATA VISION V9.0.0</div>
+        <div class="app-title">DATA VISION V9.1.5</div>
         <div id="relogio">00:00:00</div>
         <div class="header-tools">
             <button class="btn-action" style="width:28px; height:28px" onclick="takeSnapshot()">📸</button>
@@ -105,18 +138,6 @@
     <div id="typing" style="display:none; font-size:9px; color:var(--accent-color); margin: 0 0 10px 15px; font-family:monospace;">>>> PROCESSANDO VETORES...</div>
     
     <div class="input-area">
-        <select id="select-missao" onchange="atualizarMissao()">
-            <option value="padrao">📌 Protocolo Kallys (Padrão)</option>
-            <option value="estrategia">🧠 Estratégia / Planejamento</option>
-            <option value="comunicacao">🗣️ Comunicação / Escrita</option>
-            <option value="criativo">🎨 Criativo / Exploração</option>
-            <option value="aprender">🎓 Aprendizagem / Didática</option>
-            <option value="programar">💻 Software / Debug</option>
-            <option value="investigar">🕵️ Investigação / Risco</option>
-            <option value="motivacional">🔥 Moral / Disciplina</option>
-            <option value="gamer">🎮 Performance Gamer</option>
-        </select>
-
         <div class="telemetry-bar">
             <span>LAT: <span id="val-lat" class="telemetry-val">0.00s</span></span>
             <span>RPM: <span id="val-rpm" class="telemetry-val">0</span></span>
@@ -155,23 +176,39 @@
         let filesBuffer = [];
         let isSending = false;
 
+        // DICIONÁRIO DE IDIOMAS DA UI
+        const I18N = {
+            'pt-br': { placeholder: "Inserir diretriz...", send: "↑" },
+            'en': { placeholder: "Enter directive...", send: "↑" },
+            'es': { placeholder: "Insertar diretriz...", send: "↑" }
+        };
+        let idiomaAtual = 'pt-br';
+
         let perfilOperador = JSON.parse(localStorage.getItem('kallys_perfil')) || {
             dominante: "Analista", tags: [], score_tecnico: 0, score_estrategico: 0, score_criativo: 0
         };
 
         const PERSONAS = {
-            padrao: "Você é KALLYS V9.0, suporte tático com visão de dados. Use [ANÁLISE TÁTICA] no início de pensamentos complexos.",
-            estrategia: "Análise estratégica e visualização de metas.",
-            comunicacao: "Redação clara e visualização de tópicos.",
-            criativo: "Exploração de ideias.",
-            aprender: "Didática e visualização de progresso.",
-            programar: "Engenharia e debug.",
-            investigar: "Análise de riscos.",
-            motivacional: "Foco em disciplina.",
-            gamer: "Meta-game e performance."
+            padrao: "Você é KALLYS V9.1.5, suporte tático com visão de dados. Use [ANÁLISE TÁTICA] no início de pensamentos complexos.",
+            estrategia: "Você atua como um General de Dados. Sua personalidade é focada em metas de longo prazo, mitigação de riscos e alocação de recursos. Priorize listas estruturadas.",
+            comunicacao: "Você é um Especialista em Interface Humana. Use um tom diplomático, polido e focado em clareza linguística e empatia.",
+            criativo: "Você é um Motor de Inovação. Sua personalidade é expansiva e busca conexões inusitadas entre dados, aceitando termos abstratos.",
+            aprender: "Você é um Instrutor de Sistemas. Use analogias, divida conceitos complexos em etapas didáticas e valide o entendimento do Operador.",
+            programar: "Você é um Compilador Lógico. Responda com foco absoluto em sintaxe, eficiência de algoritmos e tratamento de erros. Seja extremamente direto.",
+            investigar: "Você é um Analista Forense. Sua personalidade é cética, focada em evidências detalhadas e detecção de anomalias ou falhas lógicas.",
+            motivacional: "Você é o Oficial de Disciplina. Use um tom firme, inspirador e focado em execução imediata, combatendo a procrastinação.",
+            gamer: "Você é um Tactician de Pro-Gaming. Focado em meta-game, frames, otimização de reflexos e performance competitiva sob pressão."
+        };
+
+        const HUMORES = {
+            amigavel: "Use um tom caloroso, prestativo e encorajador. Seja como um parceiro de confiança.",
+            deboxada: "Use um tom sarcástico, com pitadas de ironia e humor ácido, mas sem perder a eficiência técnica. Provoque levemente o Operador.",
+            seria: "Seja extremamente formal, seco e direto ao ponto. Elimine cortesias desnecessárias. Foco total em dados.",
+            simpatica: "Seja gentil, use emojis moderadamente e demonstre entusiasmo em ajudar. Mantenha um clima leve."
         };
 
         let missaoAtual = PERSONAS.padrao;
+        let humorAtual = HUMORES.amigavel;
 
         function vibrate(ms = 10) { if (navigator.vibrate) navigator.vibrate(ms); }
 
@@ -220,15 +257,18 @@
                     body: JSON.stringify({
                         model: "llama-3.3-70b-versatile",
                         messages: [
-                            { role: "system", content: `${missaoAtual} Se fornecer dados para gráficos, use EXCLUSIVAMENTE o formato: [CHART:tipo|labels|data|titulo].` },
+                            { 
+                                role: "system", 
+                                // INSTRUÇÃO DE IDIOMA INJETADA NO SYSTEM PROMPT
+                                content: `${missaoAtual} [TOM DE VOZ]: ${humorAtual} Responda obrigatoriamente no idioma: ${idiomaAtual}. Se fornecer dados para gráficos, use: [CHART:tipo|labels|data|titulo].` 
+                            },
                             ...historico.slice(-LIMITE_MEMORIA),
                             { role: "user", content: pFinal }
                         ],
-                        temperature: 0.4
+                        temperature: 0.6
                     })
                 });
                 
-                // EXTRAÇÃO DE TELEMETRIA (RPM / TPM) DOS HEADERS DA GROQ
                 const rpm = response.headers.get('x-ratelimit-remaining-requests') || "N/A";
                 const tpm = response.headers.get('x-ratelimit-remaining-tokens') || "N/A";
                 
@@ -253,7 +293,6 @@
                 atualizarMedidor();
             } catch (e) { 
                 document.getElementById('typing').style.display = 'none'; setLED('led-cpu', 'alert');
-                console.error("Erro na requisição:", e);
             } finally {
                 isSending = false;
             }
@@ -273,13 +312,6 @@
                         finalHtml += `<div class="thought-process"><b>SINC. NEURAL:</b> ${matchTatica[1].trim()}</div>`;
                         texto = texto.replace(matchTatica[0], '');
                     }
-                }
-                if (texto.toLowerCase().includes("perfil") || texto.toLowerCase().includes("status tático")) {
-                    const chartId = 'radar-' + Math.random().toString(36).substr(2, 9);
-                    finalHtml += `<div class="chart-container"><canvas id="${chartId}"></canvas></div>`;
-                    setTimeout(() => {
-                        renderizarGrafico(chartId, 'radar', ['Técnico', 'Estratégico', 'Criativo'], [perfilOperador.score_tecnico, perfilOperador.score_estrategico, perfilOperador.score_criativo], 'POTENCIAL');
-                    }, 200);
                 }
                 if (texto.includes('[CHART:')) {
                     const match = texto.match(/\[CHART:(.*?)\]/);
@@ -302,18 +334,18 @@
 
         function renderizarGrafico(id, tipo, labels, data, titulo) {
             const canvas = document.getElementById(id); if(!canvas) return;
-            const ctx = canvas.getContext('2d'); const isRadar = tipo.trim() === 'radar';
+            const ctx = canvas.getContext('2d');
             new Chart(ctx, {
                 type: tipo.trim(),
                 data: {
                     labels: labels,
                     datasets: [{
                         label: titulo, data: data.map(Number),
-                        backgroundColor: isRadar ? 'rgba(16, 163, 127, 0.15)' : ['#10a37f', '#007bff', '#ffca28', '#ff3333', '#c5a059'],
-                        borderColor: '#10a37f', borderWidth: 1.5, tension: 0.3
+                        backgroundColor: ['#10a37f', '#007bff', '#ffca28', '#ff3333', '#c5a059'],
+                        borderColor: '#10a37f', borderWidth: 1.5
                     }]
                 },
-                options: { responsive: true, plugins: { legend: { display: !isRadar, labels: { color: '#9ea2a8', font: { size: 9 } } } } }
+                options: { responsive: true, plugins: { legend: { labels: { color: '#9ea2a8', font: { size: 9 } } } } }
             });
         }
 
@@ -396,7 +428,27 @@
         function atualizarMissao() { 
             const sel = document.getElementById('select-missao').value;
             missaoAtual = PERSONAS[sel];
-            localStorage.setItem('kallys_active_mission', sel); vibrate(10);
+            localStorage.setItem('kallys_active_mission', sel); 
+            vibrate(10);
+        }
+
+        function atualizarHumor() {
+            const sel = document.getElementById('select-humor').value;
+            humorAtual = HUMORES[sel];
+            localStorage.setItem('kallys_active_humor', sel);
+            vibrate(10);
+        }
+
+        // FUNÇÃO DE ATUALIZAÇÃO DE IDIOMA
+        function atualizarIdioma() {
+            idiomaAtual = document.getElementById('select-idioma').value;
+            localStorage.setItem('kallys_idioma', idiomaAtual);
+            
+            const langData = I18N[idiomaAtual];
+            document.getElementById('prompt').placeholder = langData.placeholder;
+            
+            vibrate(15);
+            setLED('led-cpu', 'vision');
         }
 
         function exportarLog() {
@@ -422,8 +474,17 @@
         setInterval(() => { document.getElementById('relogio').innerText = new Date().toLocaleTimeString(); }, 1000);
         document.getElementById('prompt').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviar(); });
 
-        const salva = localStorage.getItem('kallys_active_mission');
-        if(salva) { document.getElementById('select-missao').value = salva; missaoAtual = PERSONAS[salva]; }
+        const salvaMission = localStorage.getItem('kallys_active_mission');
+        if(salvaMission) { document.getElementById('select-missao').value = salvaMission; missaoAtual = PERSONAS[salvaMission]; }
+        
+        const salvaHumor = localStorage.getItem('kallys_active_humor');
+        if(salvaHumor) { document.getElementById('select-humor').value = salvaHumor; humorAtual = HUMORES[salvaHumor]; }
+
+        const salvoIdioma = localStorage.getItem('kallys_idioma');
+        if(salvoIdioma) { 
+            document.getElementById('select-idioma').value = salvoIdioma; 
+            atualizarIdioma(); 
+        }
 
         function renderizarChat() { 
             chatBox.innerHTML = ''; 
